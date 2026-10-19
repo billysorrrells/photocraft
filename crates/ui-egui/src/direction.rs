@@ -55,7 +55,7 @@ pub fn direction_scope(dir: Dir) -> impl Drop {
 
 fn env_override() -> Option<Dir> {
     static ENV: OnceLock<Option<Dir>> = OnceLock::new();
-    *ENV.get_or_init(|| parse_dir(&std::env::var("PHOTOCRAFT_UI_DIRECTION").ok()?))
+    *ENV.get_or_init(|| parse_dir(&std::env::var("BILLO PHOTO_UI_DIRECTION").ok()?))
 }
 
 /// `rtl` / `ltr`, any case; anything else (including empty) follows the language.

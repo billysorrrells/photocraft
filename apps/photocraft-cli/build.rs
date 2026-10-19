@@ -8,7 +8,7 @@
 fn main() -> std::io::Result<()> {
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-changed=../../assets/app-icon/photocraft.ico");
-    println!("cargo:rerun-if-env-changed=PHOTOCRAFT_REQUIRE_WINRES");
+    println!("cargo:rerun-if-env-changed=BILLO PHOTO_REQUIRE_WINRES");
     if std::env::var("CARGO_CFG_TARGET_OS").as_deref() != Ok("windows") {
         return Ok(());
     }
@@ -24,7 +24,7 @@ fn main() -> std::io::Result<()> {
         .set("OriginalFilename", "photocraft-cli.exe")
         .set("InternalName", "photocraft-cli");
     if let Err(err) = res.compile() {
-        if std::env::var_os("PHOTOCRAFT_REQUIRE_WINRES").is_some() {
+        if std::env::var_os("BILLO PHOTO_REQUIRE_WINRES").is_some() {
             return Err(std::io::Error::other(format!(
                 "embedding Windows resources into photocraft-cli.exe failed: {err}. \
                  Install the Windows SDK resource compiler (rc.exe) or mingw-w64 windres and rebuild."

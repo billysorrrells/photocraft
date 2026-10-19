@@ -514,7 +514,7 @@ mod tests {
     #[test]
     #[ignore = "requires a user-supplied Camera Raw PSD"]
     fn all_sliders_fixture() {
-        let path = std::env::var("PHOTOCRAFT_CAMERA_RAW_PSD").expect("set PHOTOCRAFT_CAMERA_RAW_PSD");
+        let path = std::env::var("BILLO PHOTO_CAMERA_RAW_PSD").expect("set BILLO PHOTO_CAMERA_RAW_PSD");
         let doc = crate::import("fixture.psd", &std::fs::read(path).unwrap()).unwrap().document;
         let original = doc
             .walk()

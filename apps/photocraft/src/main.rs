@@ -151,7 +151,7 @@ mod control_port_tests {
     fn control_port_accepts_valid_numbers() {
         assert_eq!(parse_control_port("50494", "--control"), Ok(50494));
         assert_eq!(parse_control_port(" 8080 ", "--control"), Ok(8080));
-        assert_eq!(parse_control_port("0", "PHOTOCRAFT_CONTROL_PORT"), Ok(0));
+        assert_eq!(parse_control_port("0", "BILLO PHOTO_CONTROL_PORT"), Ok(0));
     }
 
     #[test]
@@ -173,23 +173,23 @@ fn main() -> eframe::Result {
     photocraft_ui_egui::type_tool::warm_fonts();
     let mut control_port: Option<u16> = None;
     let mut control_arg_errors: Vec<String> = Vec::new();
-    if let Some(value) = std::env::var("PHOTOCRAFT_CONTROL_PORT").ok().filter(|v| !v.trim().is_empty()) {
-        match parse_control_port(&value, "PHOTOCRAFT_CONTROL_PORT") {
+    if let Some(value) = std::env::var("BILLO PHOTO_CONTROL_PORT").ok().filter(|v| !v.trim().is_empty()) {
+        match parse_control_port(&value, "BILLO PHOTO_CONTROL_PORT") {
             Ok(port) => control_port = Some(port),
             Err(error) => control_arg_errors.push(error),
         }
     }
     let mut control_token = None;
     let mut control_token_file = None;
-    let mut automation_read_root = std::env::var_os("PHOTOCRAFT_AUTOMATION_READ_ROOT").map(std::path::PathBuf::from);
-    let mut automation_write_root = std::env::var_os("PHOTOCRAFT_AUTOMATION_WRITE_ROOT").map(std::path::PathBuf::from);
+    let mut automation_read_root = std::env::var_os("BILLO PHOTO_AUTOMATION_READ_ROOT").map(std::path::PathBuf::from);
+    let mut automation_write_root = std::env::var_os("BILLO PHOTO_AUTOMATION_WRITE_ROOT").map(std::path::PathBuf::from);
     let mut files = Vec::new();
     // Arguments that are not valid Unicode (issue #1108): a file manager can hand over a Latin-1
     // file name on Linux, and `std::env::args()` would panic before any window opened. Paths are
     // reported in a notice once the app is up; a control token is a usage error like a bad port.
     let mut unreadable_paths: Vec<String> = Vec::new();
     let mut safe_gpu = false;
-    let mut in_window_menus = std::env::var_os("PHOTOCRAFT_IN_WINDOW_MENUS").is_some_and(|v| !v.is_empty() && v != "0");
+    let mut in_window_menus = std::env::var_os("BILLO PHOTO_IN_WINDOW_MENUS").is_some_and(|v| !v.is_empty() && v != "0");
     let mut args = std::env::args_os().skip(1);
     while let Some(a) = args.next() {
         match a.to_str() {
@@ -396,7 +396,7 @@ fn main() -> eframe::Result {
             #[cfg(target_os = "macos")]
             mac_window::disable_native_title_drag();
             // Long commands and file opens run as background jobs with progress and Cancel (#210).
-            app.background_jobs = std::env::var_os("PHOTOCRAFT_INLINE_JOBS").is_none();
+            app.background_jobs = std::env::var_os("BILLO PHOTO_INLINE_JOBS").is_none();
             // Displays and their profiles (#569): wait briefly so the first frames already use
             // the right profile; a slower reading is applied when it arrives, and the shell reads
             // again when the displays may have changed.
@@ -435,7 +435,7 @@ fn main() -> eframe::Result {
                 }
                 if !software_window
                     && plan.backend != photocraft_engine::prefs::GpuBackend::Cpu
-                    && std::env::var_os("PHOTOCRAFT_CPU_CANVAS").is_none()
+                    && std::env::var_os("BILLO PHOTO_CPU_CANVAS").is_none()
                     && app.session.prefs().performance.effective_rendering_mode() != photocraft_engine::prefs::RenderingMode::Cpu
                 {
                     app.set_wgpu(rs);
@@ -444,7 +444,7 @@ fn main() -> eframe::Result {
                     let _ = photocraft_ui_egui::gpu_canvas::DeviceHealth::watch(&rs.device);
                 }
             }
-            let fallback_reason = std::env::var("PHOTOCRAFT_GPU_STARTUP_FAILURE").ok().or_else(|| {
+            let fallback_reason = std::env::var("BILLO PHOTO_GPU_STARTUP_FAILURE").ok().or_else(|| {
                 (app.perf.gpu_info.canvas == "cpu" && mode != photocraft_engine::prefs::RenderingMode::Cpu)
                     .then(|| app.perf.gpu_info.fallback.clone())
                     .flatten()
@@ -552,7 +552,7 @@ fn main() -> eframe::Result {
                 .args(std::env::args_os().skip(1))
                 .arg("--safe-gpu")
                 .env_remove("WGPU_BACKEND")
-                .env("PHOTOCRAFT_GPU_STARTUP_FAILURE", &reason)
+                .env("BILLO PHOTO_GPU_STARTUP_FAILURE", &reason)
                 .spawn();
             match launched {
                 Ok(_) => return Ok(()),

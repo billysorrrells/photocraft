@@ -413,7 +413,7 @@ fn render_and_spool(doc: &Document, p: &Value, cmd: &str) -> Result<Value> {
         // renders and reports the command).
         if printing_disabled() {
             return Err(other(
-                "printing is disabled in this process (photocraft_engine::print_cmds::disable_printing or PHOTOCRAFT_NO_PRINT); use dryRun: true",
+                "printing is disabled in this process (photocraft_engine::print_cmds::disable_printing or BILLO PHOTO_NO_PRINT); use dryRun: true",
             ));
         }
         spool = json!(craft_print::submit(&pdf, &job).map_err(other)?);
@@ -447,7 +447,7 @@ pub fn disable_printing() {
 
 /// Whether spooling is blocked by [`disable_printing`] or `PHOTOCRAFT_NO_PRINT`.
 pub fn printing_disabled() -> bool {
-    PRINTING_DISABLED.load(std::sync::atomic::Ordering::Relaxed) || std::env::var_os("PHOTOCRAFT_NO_PRINT").is_some_and(|v| !v.is_empty() && v != "0")
+    PRINTING_DISABLED.load(std::sync::atomic::Ordering::Relaxed) || std::env::var_os("BILLO PHOTO_NO_PRINT").is_some_and(|v| !v.is_empty() && v != "0")
 }
 
 /// The printers the system spooler knows (Print's Printer menu): CUPS queues and driverless

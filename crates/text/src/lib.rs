@@ -143,7 +143,7 @@ static SHARED: warm::Warm<std::sync::Mutex<TextEngine>> = warm::Warm::new();
 /// Whether [`shared`] scans the installed fonts (native builds, outside tests, unless
 /// `PHOTOCRAFT_NO_SYSTEM_FONTS` is set). Without the scan it is cheap to build.
 fn uses_system_fonts() -> bool {
-    cfg!(not(target_arch = "wasm32")) && !cfg!(test) && std::env::var_os("PHOTOCRAFT_NO_SYSTEM_FONTS").is_none()
+    cfg!(not(target_arch = "wasm32")) && !cfg!(test) && std::env::var_os("BILLO PHOTO_NO_SYSTEM_FONTS").is_none()
 }
 
 fn new_shared() -> std::sync::Mutex<TextEngine> {

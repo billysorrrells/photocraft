@@ -1859,7 +1859,7 @@ fn web_time_now() -> Option<std::time::Instant> {
     #[cfg(not(target_arch = "wasm32"))]
     {
         static T: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
-        T.get_or_init(|| std::env::var_os("PHOTOCRAFT_FX_TRACE").is_some()).then(std::time::Instant::now)
+        T.get_or_init(|| std::env::var_os("BILLO PHOTO_FX_TRACE").is_some()).then(std::time::Instant::now)
     }
     #[cfg(target_arch = "wasm32")]
     None

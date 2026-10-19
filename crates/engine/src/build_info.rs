@@ -15,12 +15,12 @@ pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// The full git commit this build was made from, when the build environment recorded it.
 pub fn git_sha() -> Option<&'static str> {
-    option_env!("PHOTOCRAFT_BUILD_SHA").map(str::trim).filter(|s| !s.is_empty())
+    option_env!("BILLO PHOTO_BUILD_SHA").map(str::trim).filter(|s| !s.is_empty())
 }
 
 /// The build date (`YYYY-MM-DD`), when the build environment recorded it.
 pub fn build_date() -> Option<&'static str> {
-    option_env!("PHOTOCRAFT_BUILD_DATE").map(str::trim).filter(|s| !s.is_empty())
+    option_env!("BILLO PHOTO_BUILD_DATE").map(str::trim).filter(|s| !s.is_empty())
 }
 
 /// The commit shortened for display.

@@ -129,9 +129,9 @@ impl GpuCanvas {
     /// Like [`GpuCanvas::new`] with a preferred texture tile side (`PHOTOCRAFT_GPU_TILE` wins).
     pub fn with_tile(rs: &RenderState, tile: Option<u32>) -> Self {
         let max = rs.device.limits().max_texture_dimension_2d;
-        let env_tile = std::env::var("PHOTOCRAFT_GPU_TILE").ok().and_then(|v| v.parse::<u32>().ok());
+        let env_tile = std::env::var("BILLO PHOTO_GPU_TILE").ok().and_then(|v| v.parse::<u32>().ok());
         let tile = env_tile.or(tile).unwrap_or(DEFAULT_TILE).clamp(64, max);
-        let high = match std::env::var("PHOTOCRAFT_CANVAS_F16").ok().as_deref() {
+        let high = match std::env::var("BILLO PHOTO_CANVAS_F16").ok().as_deref() {
             _ if !supports_f16_canvas(&rs.adapter) => HighPolicy::Off,
             Some("0") => HighPolicy::Off,
             Some("1") => HighPolicy::Always,
@@ -284,7 +284,7 @@ impl GpuCanvas {
     /// Whether [`GpuCanvas::composite`] would draw `doc` with the wgpu compositor (rather than
     /// fall back to the CPU compositor).
     pub fn supports(&self, doc: &photocraft_doc::Document) -> bool {
-        if std::env::var_os("PHOTOCRAFT_CPU_COMPOSE").is_some() || doc.size.width == 0 || doc.size.height == 0 {
+        if std::env::var_os("BILLO PHOTO_CPU_COMPOSE").is_some() || doc.size.width == 0 || doc.size.height == 0 {
             return false;
         }
         let r = self.rs.renderer.read();
@@ -390,8 +390,8 @@ impl GpuCanvas {
         if size[0] == 0 || size[1] == 0 {
             return Err(photocraft_gpu::Unsupported("empty document".into()));
         }
-        if std::env::var_os("PHOTOCRAFT_CPU_COMPOSE").is_some() {
-            return Err(photocraft_gpu::Unsupported("disabled by PHOTOCRAFT_CPU_COMPOSE".into()));
+        if std::env::var_os("BILLO PHOTO_CPU_COMPOSE").is_some() {
+            return Err(photocraft_gpu::Unsupported("disabled by BILLO PHOTO_CPU_COMPOSE".into()));
         }
         if let Some(f) = self.fault() {
             return Err(photocraft_gpu::Unsupported(f.to_string()));
@@ -504,7 +504,7 @@ impl GpuCanvas {
         };
         if result.is_ok() {
             d.regenerate_mips(device, queue, res, [region.x0 as u32, region.y0 as u32, region.x1 as u32, region.y1 as u32]);
-            if std::env::var_os("PHOTOCRAFT_GPU_SYNC").is_some() {
+            if std::env::var_os("BILLO PHOTO_GPU_SYNC").is_some() {
                 // Benchmarking: wait for the GPU so callers can time the whole refresh.
                 #[cfg(not(target_arch = "wasm32"))]
                 self.health.wait(device, None);
@@ -1227,7 +1227,7 @@ pub fn canvas_texture_bytes(size: [u32; 2], tile: u32, bpp: u64) -> u64 {
 pub fn physical_memory() -> Option<u64> {
     static RAM: std::sync::OnceLock<Option<u64>> = std::sync::OnceLock::new();
     *RAM.get_or_init(|| {
-        if let Some(mb) = std::env::var("PHOTOCRAFT_RAM_MB").ok().and_then(|v| v.trim().parse::<u64>().ok()) {
+        if let Some(mb) = std::env::var("BILLO PHOTO_RAM_MB").ok().and_then(|v| v.trim().parse::<u64>().ok()) {
             return mb.checked_mul(1 << 20);
         }
         detect_physical_memory()

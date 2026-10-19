@@ -1399,7 +1399,7 @@ pub mod live {
 
     impl LiveTokens {
         pub fn from_env() -> Self {
-            Self { path: std::env::var_os("PHOTOCRAFT_THEME_FILE").map(Into::into), ..Default::default() }
+            Self { path: std::env::var_os("BILLO PHOTO_THEME_FILE").map(Into::into), ..Default::default() }
         }
 
         /// Re-apply overrides if the file changed. Returns true when tokens were updated.

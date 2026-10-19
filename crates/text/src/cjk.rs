@@ -93,7 +93,7 @@ pub fn ui_script_order() -> [CjkScript; 4] {
 
 fn detect_locale() -> Option<String> {
     let env = |k: &str| std::env::var(k).ok().map(|v| v.trim().to_string()).filter(|v| !v.is_empty() && v != "C" && v != "POSIX" && !v.starts_with("C."));
-    if let Some(v) = env("PHOTOCRAFT_LOCALE") {
+    if let Some(v) = env("BILLO PHOTO_LOCALE") {
         return Some(v);
     }
     if let Some(v) = os_locale() {
